@@ -1,0 +1,11 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  &__select {
+    padding: 10px 10px;
+    border-radius: 5px;
+  }
+}
