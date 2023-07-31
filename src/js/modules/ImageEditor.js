@@ -1,5 +1,6 @@
 import { fabric } from "fabric";
 import { FIGURE_OPTIONS } from "../constants/figure";
+import { TEXT_STYLES } from "../constants/text";
 
 const ImageEditor = (canvasId) => {
   const canvas = new fabric.Canvas(canvasId);
@@ -100,7 +101,30 @@ const ImageEditor = (canvasId) => {
     saveJSON()
   };
 
+  const setObjectProperty = (property, value) => {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+      activeObject.set(property, value);
+      canvas.renderAll();
+    }
+  };
 
+  const setActiveTextStyle = (activeObject, fontWeight, fontStyle, textDecoration) => {
+    if (activeObject instanceof fabric.IText) {
+      activeObject.set('fontWeight', fontWeight);
+      activeObject.set('fontStyle', fontStyle);
+      activeObject.set('textDecoration', textDecoration);
+    }
+  }
+
+  const changeTextStyle = (textStyleSelect) => {
+    const activeObject = canvas.getActiveObject();
+    const [fontWeight, fontStyle, textDecoration] = TEXT_STYLES[textStyleSelect];
+    if (activeObject instanceof fabric.IText) {
+      setActiveTextStyle(activeObject, fontWeight, fontStyle, textDecoration);
+      canvas.renderAll();
+    }
+  }
 
   return {
     loadImage,
@@ -111,6 +135,8 @@ const ImageEditor = (canvasId) => {
     addText,
     addFigure,
     saveCanvasData,
+    setObjectProperty,
+    changeTextStyle,
   }
 }
 

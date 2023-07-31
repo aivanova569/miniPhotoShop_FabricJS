@@ -1,3 +1,10 @@
+export const figureOptions = {
+  rect: 'rectangle',
+  circle: 'circle',
+  rhombus: 'rhombus',
+  triangle: 'triangle'
+};
+
 export const FIGURE_OPTIONS = {
   rect: {
     type: 'Rect',

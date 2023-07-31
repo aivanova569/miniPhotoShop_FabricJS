@@ -1,0 +1,13 @@
+.styles-editor {
+    padding: 10px 0;
+    margin-top: 10px;
+
+    &__item {
+        margin-bottom: 5px;
+    }
+
+    &__label {
+        display: inline-block;
+        margin-right: 15px;
+    }
+}

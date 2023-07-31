@@ -1,4 +1,7 @@
 import ImageEditor from "./modules/ImageEditor";
+import RenderPage from "./modules/RenderPage";
+import { figureOptions } from "./constants/figure";
+import { textStyles } from "./constants/text";
 
 window.addEventListener('DOMContentLoaded', () => {
   const editor = ImageEditor('canvas');
@@ -10,6 +13,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const addFigureButton = document.getElementById('figure_btn');
   const selectElement = document.getElementById('choose_figure');
   const saveImgButton = document.getElementById('save_btn');
+  const canvasColorInput = document.getElementById('canvas-color');
+  const canvasOpacityInput = document.getElementById('opacity-slider');
+  const textStyleSelect = document.getElementById('text_style');
+
+  RenderPage().populateSelectOptions(selectElement, figureOptions);
+  RenderPage().populateSelectOptions(textStyleSelect, textStyles);
 
   fileInput.addEventListener('change', editor.handleFileUpload);
   resetButton.addEventListener('click', editor.reset);
@@ -19,4 +28,15 @@ window.addEventListener('DOMContentLoaded', () => {
     editor.addFigure(selectElement.value);
   })
   saveImgButton.addEventListener('click', editor.saveCanvasData);
+  canvasColorInput.addEventListener('input', (event) => {
+    editor.setObjectProperty('fill', event.target.value);
+  });
+  canvasOpacityInput.addEventListener('input', (event) => {
+    const opacityValue = event.target.value / 100;
+    editor.setObjectProperty('opacity', opacityValue);
+  });
+
+  textStyleSelect.addEventListener('change', () => {
+    editor.changeTextStyle(textStyleSelect.value)
+  });
 });

@@ -14,12 +14,7 @@
   <input class="input input_file" type="file" id="file-input">
   <button class="btn" id="text_btn">Add Text</button>
   <div>
-    <select class="toolbar__select" name="select" id="choose_figure">
-      <option value="rect">rectangle</option>
-      <option value="circle">circle</option>
-      <option value="rhombus">rhombus</option>
-      <option value="triangle">triangle</option>
-    </select>
+    <select class="toolbar__select" name="select" id="choose_figure"></select>
     <button class="btn" id="figure_btn">Add figure</button>
   </div>
   <button class="btn" id="draw_btn">Draw</button>
@@ -27,7 +22,23 @@
   <button class="btn" id="reset">Clear</button>
 </div>
 
-<canvas id="canvas" width="800" height="600" style="border: 2px solid black"></canvas>
+<canvas id="canvas" width="800" height="450" style="border: 2px solid black"></canvas>
+
+<div class="styles-editor">
+  <div class="styles-editor__item">
+    <label class="styles-editor__label">Chose color</label>
+    <input id="canvas-color" type="color" />
+  </div>
+  <div class="styles-editor__item">
+    <label class="styles-editor__label">Change opacity</label>
+    <input type="range" min="0" max="100" step="1" id="opacity-slider"/>
+  </div>
+
+  <div class="styles-editor__item">
+    <labe>Change text</labe>
+    <select name="select-text" id="text_style"></select>
+  </div>
+</div>
 
 <script src="../dist/js/script.bundle.js" type="text/javascript"></script>
 <script src="../dist/js/styles.bundle.js" type="text/javascript"></script>
