@@ -2,6 +2,8 @@ import { fabric } from "fabric";
 import { FIGURE_OPTIONS } from "../constants/figure";
 import { TEXT_STYLES } from "../constants/text";
 
+const JSON_FILE_TYPE = 'application/json';
+
 const ImageEditor = (canvasId) => {
   const canvas = new fabric.Canvas(canvasId);
   console.log('canvas', canvas);
@@ -23,16 +25,22 @@ const ImageEditor = (canvasId) => {
     }
   }
 
+  const handleUploadJSONFile = (file) => {
+    canvas.loadFromJSON(JSON.parse(file), () => {
+      canvas.renderAll();
+    });
+  }
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = (e) => {
       const imageDataURL = e.target.result;
-      loadImage(imageDataURL);
+      file.type === JSON_FILE_TYPE ? handleUploadJSONFile(e.target.result) : loadImage(imageDataURL);
     };
 
-    reader.readAsDataURL(file);
+    file.type === JSON_FILE_TYPE ? reader.readAsText(file) : reader.readAsDataURL(file);
   }
 
   const reset = () => {
@@ -85,7 +93,7 @@ const ImageEditor = (canvasId) => {
 
   const saveJSON = () => {
     const canvasJSON = JSON.stringify(canvas.toJSON());
-    const blob = new Blob([canvasJSON], { type: 'application/json' });
+    const blob = new Blob([canvasJSON], { type: JSON_FILE_TYPE });
     const url = URL.createObjectURL(blob);
     const downloadLink = document.createElement('a');
     downloadLink.href = url;

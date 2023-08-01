@@ -14,6 +14,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const selectElement = document.getElementById('choose_figure');
   const saveImgButton = document.getElementById('save_btn');
   const canvasColorInput = document.getElementById('canvas-color');
+  const canvasBorderColorInput = document.getElementById('border-color');
+  const canvasBorderWidthInput = document.getElementById('stroke-width');
   const canvasOpacityInput = document.getElementById('opacity-slider');
   const textStyleSelect = document.getElementById('text_style');
 
@@ -30,6 +32,12 @@ window.addEventListener('DOMContentLoaded', () => {
   saveImgButton.addEventListener('click', editor.saveCanvasData);
   canvasColorInput.addEventListener('input', (event) => {
     editor.setObjectProperty('fill', event.target.value);
+  });
+  canvasBorderColorInput.addEventListener('input', (event) => {
+    editor.setObjectProperty('stroke', event.target.value);
+  });
+  canvasBorderWidthInput.addEventListener('input', (event) => {
+    editor.setObjectProperty('strokeWidth', event.target.value);
   });
   canvasOpacityInput.addEventListener('input', (event) => {
     const opacityValue = event.target.value / 100;
